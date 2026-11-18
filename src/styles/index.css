@@ -1,0 +1,39 @@
+@import '@fontsource-variable/roboto-mono';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Tokens medidos nos prints do Figma (amostragem de pixels), em canais RGB.
+  Conferir com o Dev Mode do Figma antes da entrega final.
+*/
+@layer base {
+  :root {
+    --background: 20 13 10;          /* #140d0a  fundo da página */
+    --card: 36 22 18;                /* #241612  cards, sidebar, rodapé */
+    --band: 56 34 15;                /* #38220f  faixa do rodapé */
+    --primary: 210 138 76;           /* #d28a4c  botões e preenchimentos */
+    --highlight: 232 155 85;         /* #e89b55  texto de destaque, links, preços */
+    --foreground: 245 241 235;       /* #f5f1eb  texto principal */
+    --muted-foreground: 207 178 140; /* #cfb28c  texto secundário */
+    --border: 61 38 26;              /* #3d261a  bordas de campos */
+    --rule: 138 91 51;               /* #8a5b33  linhas divisórias */
+    --destructive: 224 99 74;
+  }
+  * { @apply border-border; }
+  html { color-scheme: dark; }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: 'zero' 1;
+  }
+  :focus-visible { @apply outline-none ring-2 ring-highlight ring-offset-2 ring-offset-background; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
