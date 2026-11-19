@@ -30,6 +30,11 @@ export const mulEth = (a: EthString, qty: number): EthString => {
   if (!Number.isInteger(qty) || qty < 0) throw new Error('Quantidade deve ser inteira e não negativa')
   return fromWei(toWei(a) * BigInt(qty))
 }
+/** Percentual exato (arredonda para baixo na menor unidade): percentEth('26.83', 10) => '2.683'. */
+export const percentEth = (a: EthString, percent: number): EthString => {
+  if (!Number.isInteger(percent) || percent < 0 || percent > 100) throw new Error('Percentual inválido')
+  return fromWei((toWei(a) * BigInt(percent)) / 100n)
+}
 export const sumEth = (values: EthString[]): EthString => fromWei(values.reduce((acc, v) => acc + toWei(v), 0n))
 export const compareEth = (a: EthString, b: EthString): number => {
   const d = toWei(a) - toWei(b)

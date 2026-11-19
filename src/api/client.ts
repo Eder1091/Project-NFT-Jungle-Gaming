@@ -1,10 +1,18 @@
 import axios, { AxiosError } from 'axios'
+import { getAnonId, getToken } from '@/lib/session'
 import type { ApiErrorBody } from './types'
 
 export const api = axios.create({
   baseURL: '/api',
   timeout: 8000,
   headers: { 'Content-Type': 'application/json' },
+})
+
+api.interceptors.request.use((config) => {
+  const token = getToken()
+  if (token) config.headers.set('Authorization', `Bearer ${token}`)
+  config.headers.set('X-Anon-Id', getAnonId())
+  return config
 })
 
 export class ApiError extends Error {

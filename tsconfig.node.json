@@ -13,5 +13,5 @@
     "strict": true,
     "types": ["node"]
   },
-  "include": ["vite.config.ts", "playwright.config.ts", "tailwind.config.ts", "e2e", "scripts"]
+  "include": ["vite.config.ts", "playwright.config.ts", "tailwind.config.ts", "e2e", "scripts", "src/mocks/__tests__"]
 }

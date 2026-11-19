@@ -2,7 +2,7 @@
  * Contratos tipados da API simulada. Fonte única para transporte (Axios/MSW), estado (TanStack Query) e UI.
  * Valores em ETH sempre como string decimal; quantidades sempre inteiras.
  */
-import type { EthString } from '@/lib/eth'
+import type { EthString } from '../lib/eth.ts'
 
 export type { EthString }
 
@@ -47,6 +47,8 @@ export interface Session {
   /** ISO 8601. Após esse instante, chamadas privadas respondem 401 `session_expired`. */
   expiresAt: string
 }
+
+export interface AuthResponse { session: Session; token: string }
 
 export interface RegisterInput { username: string; email: string; password: string; confirmPassword: string }
 export interface LoginInput { email: string; password: string }
@@ -233,6 +235,6 @@ export interface ServerToClientEvents {
   'order.updated': (e: OrderUpdatedEvent) => void
 }
 export interface ClientToServerEvents {
-  'subscribe': (topics: string[]) => void
-  'unsubscribe': (topics: string[]) => void
+  /** `token` identifica o usuário para eventos privados (pedidos). Anônimo = `null`. */
+  subscribe: (payload: { token: string | null; topics: string[] }) => void
 }
