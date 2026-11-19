@@ -17,7 +17,7 @@ const peers = new Set<Peer>()
 let resolveToken: (token: string) => string | null = () => null
 export function setTokenResolver(fn: (token: string) => string | null) { resolveToken = fn }
 
-const link = ws.link(`${REALTIME_URL}${REALTIME_PATH}/`)
+const link = ws.link(/^wss:\/\/realtime\.kurio\.test\/socket\.io/)
 
 export const socketHandlers = [
   link.addEventListener('connection', (connection) => {
